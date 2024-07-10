@@ -25,17 +25,11 @@ export default {
 
     this.store.isLogged = true;
     const user = JSON.parse(userString);
-    const userId = user.idUser;
-    this.store.user.id = userId;
-    const userEmail = user.email;
-    this.store.user.email = userEmail;
-    const userName = user.name;
-    this.store.user.name = userName;
-    const userSurname = user.surname;
-    this.store.user.surname = userSurname;
+    this.store.user = user;
 
     }
-  }
+  },
+  
 }
 
 </script>

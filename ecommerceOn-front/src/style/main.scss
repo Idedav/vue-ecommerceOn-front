@@ -2,5 +2,14 @@
 
 body{
     background-color: beige;
-    color: black;
+    color: #743D1E;
+}
+
+.btn-brown{
+    background-color: #743D1E;
+    color: beige;
+    &:hover{
+        background-color: #743e1e;
+        columns: beige !important;
+    }
 }

@@ -1,14 +1,12 @@
 <script>
 import axios from 'axios';
 import { store } from '../data/store.js';
-import localStore from '../data/localStorage.js';
 
 export default {
   name : 'Login',
   data(){
     return {
         store,
-        localStore,
         email : '',
         password : '',
         isError : false
@@ -21,10 +19,11 @@ export default {
             password :  this.password
         } )
         .then(res => {
-          // Salva l'utente nello storage locale
+          // Salva l'utente nello storage locale e nello store.js
           localStorage.setItem("userInfo", JSON.stringify(res.data));
+          this.store.user = res.data;
           // Imposta il flag di accesso
-          this.localStore.commit("setIsLogged", true);
+          this.store.isLoaded = true;
         //   Reindirizzo alla home
           this.$router.push("/");
         })
