@@ -21,6 +21,10 @@ export default {
       axios.get(store.apiUrl + 'order/' + this.$route.params.idOrder)
        .then(res => {
         console.log(res.data);
+          if(res.data.user.idUser != this.store.user.idUser) {
+            this.$router.push('/unauthorized');
+            return;
+          }
           this.order = res.data;
           this.isLoaded = true;
         })
@@ -96,7 +100,7 @@ export default {
 
 .card-custom{
   width: 500px !important;
-  background-color: beige;
+  background-color: #F8F9FA;
   border-radius: 10px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }

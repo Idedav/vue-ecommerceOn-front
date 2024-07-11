@@ -1,7 +1,7 @@
 <script>
 
 export default {
-  name : 'Error404',
+  name : 'Error401',
 }
 
 </script>
@@ -9,8 +9,8 @@ export default {
 <template>
 
     <div class="container-fluid d-flex flex-column justify-content-center align-items-center">
-      <h1>ERROR404</h1>
-      <p>Risorsa non trovata</p>
+      <h1>ERROR401</h1>
+      <p>Non sei autorizzato a visualizzare questa pagina.</p>
       <div class="btn btn-warning">
         <router-link :to="{name: 'home'}">Torna alla home</router-link>
       </div>

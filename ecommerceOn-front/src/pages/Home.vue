@@ -58,15 +58,14 @@ export default {
    <h1 class="text-center pb-4">I nostri prodotti</h1>
 
    <div  class="container d-flex flex-wrap justify-content-center">
-      <div v-for="article in articles" class="card mx-2 my-3 card-custom" style="width: 18rem;">
+      <router-link :to="{name: 'article-detail', params:{idArticle: article.idArticle}}" v-for="article in articles" class="card mx-2 my-3 card-custom" style="width: 18rem;">
          <img :src="article.thumb" class="card-img-top">
          <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">{{ article.name }}</h5>
             <p class="card-text">{{ article.description }}</p>
             <p>Prezzo: <b>{{ article.unitPrice }} &euro;</b></p>
-            <router-link :to="{name: 'article-detail', params:{idArticle: article.idArticle}}" class="btn btn-warning">Visualizza Prodotto</router-link> 
          </div>
-      </div>
+      </router-link>
    </div>
 
 
@@ -77,16 +76,21 @@ export default {
 <style lang="scss" scoped>
 
 .card-custom {
-   border: 2px solid #FDF031;
-   background-color: #743D1E;
+   border: none;
+   background-color: rgb(116, 61, 30);
    color: beige;
+   transition: 0.25s ease;
+   &:hover{
+      transform: translate(-5px, -5px);
+      box-shadow:rgba(116, 61, 30, .4) 5px 5px, rgba(116, 61, 30, 0.3) 10px 10px, rgba(116, 61, 30, 0.2) 15px 15px, rgba(116, 61, 30, 0.1) 20px 20px, rgba(116, 61, 30, 0.05) 25px 25px;
+   }
    img{
       height: 300px;
    }
-   a{
-      color: black;
-      text-decoration: none;
-   }
 }
 
+a{
+   color: black;
+   text-decoration: none;
+}
 </style>

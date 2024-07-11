@@ -47,7 +47,7 @@ export default {
             })
             .then(res => {
                 console.log(res.data);
-                this.$router.push("/orders")
+                this.$router.push("/order-detail/" + res.data.idOrder);
             })
 
         }

@@ -51,11 +51,16 @@ export default {
               <label for="exampleInputEmail1" class="form-label">Email</label>
               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="email">
           </div>
-          <div class="mb-3">
+          <div>
               <label for="exampleInputPassword1" class="form-label">Password</label>
               <input type="password" class="form-control" id="exampleInputPassword1" v-model="password">
           </div>
-          <button type="submit" class="btn btn-warning">Accedi</button>
+          <div class="container-error">
+            <p  v-if="isError">E-mail o Password errati</p>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-warning">Accedi</button>
+          </div>
       </form>  
   </div>
 
@@ -68,6 +73,11 @@ export default {
 
 h1{
   color: black;
+}
+
+.container-error{
+  height: 30px;
+  color: red;
 }
 
 

@@ -42,7 +42,9 @@ export default {
 
     },
     handleAddArticle(){
-      this.qtyOrdered++;
+      if(this.qtyOrdered < this.article.qtyAvailable){
+        this.qtyOrdered++;
+      }
     },
     handleRemoveArticle(){
       if (this.qtyOrdered > 1 ) {
@@ -71,14 +73,14 @@ export default {
   <Loader/>
 </div>
 
-<div v-else class="d-flex">
+<div v-else class="d-flex container-article">
 
   <div class="image me-5">
     <img :src="article.thumb" alt="">
   </div>
 
   <div class="text">
-    <h1>{{ article.name }}</h1>
+    <h2>{{ article.name }}</h2>
     <p>{{ article.description }}.</p>
     <p>Prezzo unitario: <b>{{ article.unitPrice }} &euro;</b></p>
     <p>Quantità disponibile: <b>{{ article.qtyAvailable }}</b></p>
@@ -108,8 +110,13 @@ export default {
 
 <style lang="scss" scoped>
 
-h1{
-    color: black;
+.container-article{
+  border-radius: 10px;
+  padding: 30px;
+  background-color: rgba(0,0,0, .7);
+  color: beige;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
 
 .image{
@@ -130,9 +137,9 @@ h1{
 }
 
 .btn-custom{
-  background-color: black;
-  color: white;
-  border: 1px solid black;
+  font-weight: bold;
+  background-color: beige;
+  color: black;
 }
 
 </style>

@@ -8,6 +8,7 @@ import Login from './pages/Login.vue';
 import Orders from './pages/Orders.vue';
 import CheckOut from './pages/CheckOut.vue';
 import OrderDetail from './pages/OrderDetail.vue';
+import Error401 from './pages/Error401.vue';
 
 const router = createRouter({
 
@@ -50,6 +51,11 @@ const router = createRouter({
             path: '/article/:idArticle',
             name: 'article-detail',
             component: ArticleDetail
+        },
+        {
+            path: '/unauthorized',
+            name: 'error-401',
+            component: Error401
         },
         {
             path: '/:pathMatch(.*)*',

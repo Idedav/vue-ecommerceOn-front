@@ -12,7 +12,8 @@ export default {
     return{
       store,
       orders: {},
-      isLoaded : false
+      isLoaded : false,
+      orderEmpty : false,
     }
   },
   methods:{
@@ -21,8 +22,11 @@ export default {
 
       axios.get(store.apiUrl + 'orders/' + store.user.idUser)
       .then(res =>{
-        this.orders = res.data;
-        console.log(res.data);
+        if(res.data.length > 0){
+          this.orders = res.data;
+        }else{
+          this.orderEmpty = true;
+        }
         this.isLoaded = true;
       })
 
@@ -72,22 +76,32 @@ export default {
 
 <div v-else class="container">
 
-    <h2 class="text-center mb-5">I tuoi ordini</h2>
+    <div v-if="orderEmpty">
+      <h2 class="text-center">Non hai ancora effettuato nessun ordine</h2>
+      <p class="text-center">Vai alla <router-link to="/">pagina dei prodotti</router-link> per acquistare.</p>
+    </div>
 
-    <div class="d-flex flex-wrap justify-content-center">
+    <div v-else>
 
-      <div v-for="order in orders" class="card mx-4 card-custom mb-4" style="width: 18rem;">
-        <router-link :to="{name: 'order-detail', params:{idOrder: order.idOrder}}" class="card-body">
-          <h5 class="card-title mb-3">Ordine n° {{ order.idOrder }}</h5>
-          <p class="card-text"><b>Effetuato il:</b> {{ order.orderDate }}</p>
-          <p class="card-text"><b>Alle ore:</b> {{ order.orderTime }}</p>
-          <p class="card-text"><b>Metodo di pagamento: </b> {{ formatTypePayment(order.typePayment) }}</p> 
-          <p><b>Prezzo totale:</b> {{ order.totalPrice }} &euro;</p>
-          <p><b>Stato Ordine:</b> {{ formatStatus(order.state) }}</p>
-        </router-link> 
+      <h2 class="text-center mb-5">I tuoi ordini</h2>
+  
+      <div class="d-flex flex-wrap justify-content-center">
+  
+        <div v-for="order in orders" class="card mx-4 card-custom mb-4" style="width: 18rem;">
+          <router-link :to="{name: 'order-detail', params:{idOrder: order.idOrder}}" class="card-body">
+            <h5 class="card-title mb-3">Ordine n° {{ order.idOrder }}</h5>
+            <p class="card-text"><b>Effetuato il:</b> {{ order.orderDate }}</p>
+            <p class="card-text"><b>Alle ore:</b> {{ order.orderTime }}</p>
+            <p class="card-text"><b>Metodo di pagamento: </b> {{ formatTypePayment(order.typePayment) }}</p> 
+            <p><b>Prezzo totale:</b> {{ order.totalPrice }} &euro;</p>
+            <p><b>Stato Ordine:</b> {{ formatStatus(order.state) }}</p>
+          </router-link> 
+        </div>
+  
       </div>
 
     </div>
+
   
 </div>
 
@@ -96,11 +110,8 @@ export default {
 <style lang="scss" scoped>
 
 .card-custom{
-  background-color: beige;
+  background-color: #F8F9FA;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  .btn-custom{
-    background-color: beige;
-  }
 }
 
 img{

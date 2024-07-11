@@ -46,7 +46,7 @@ export default {
 
     },
     deleteArticleToCart(idArticle){
-      axios.delete(store.apiUrl + 'delete-article-cart/' + this.cart.cartId + '/' + idArticle)
+      axios.delete(store.apiUrl + 'delete-article-cart/' + store.user.idUser + '/' + idArticle)
       .then(res => {
         console.log(res.data);
         this.getCart();
@@ -75,8 +75,8 @@ export default {
 
 <div v-else>
 
-  <div v-if="cartEmpty">
-    <p>Non hai ancora aggiunto alcun articolo nel tuo carrello.</p>
+  <div v-if="cartEmpty" class="text-center">
+    <h2>Non hai ancora aggiunto alcun articolo nel tuo carrello.</h2>
     <p>Vai alla <router-link :to="{name: 'home'}">homepage</router-link> per iniziare a acquistare.</p>
   </div>
 
